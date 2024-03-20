@@ -1,11 +1,12 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyCR4P76VK8MhBNr_USQp2JrDcY6PkLX6-0",
-  authDomain: "task-management-b9527.firebaseapp.com",
-  projectId: "task-management-b9527",
-  storageBucket: "task-management-b9527.appspot.com",
-  messagingSenderId: "927835389371",
-  appId: "1:927835389371:web:c6b8d86663bbf4b2ed989e",
-  measurementId: "G-22QTNHF006",
+  apiKey: "AIzaSyCxP4z5MqELT80SdawLrw6sn84byS72bh0",
+  authDomain: "task-management-2993c.firebaseapp.com",
+  databaseURL: "https://task-management-2993c-default-rtdb.firebaseio.com",
+  projectId: "task-management-2993c",
+  storageBucket: "task-management-2993c.appspot.com",
+  messagingSenderId: "1019215501513",
+  appId: "1:1019215501513:web:c0458b7c3fb47831b1d518",
+  measurementId: "G-8921N42TN4",
 };
 
 // Initialize Firebase
@@ -65,8 +66,8 @@ function changeStatus(code) {
       .querySelector("#editbtn").style.backgroundColor =
       "rgba(116, 116, 116, 0.671)";
     document.getElementById(code).querySelector("#status").innerHTML = `
-              <i class="far fa-check-circle"></i> Completed
-              `;
+            <i class="far fa-check-circle"></i> Completed
+            `;
   } else {
     firebase
       .database()
@@ -115,9 +116,9 @@ function editData(c) {
     document.getElementById("addTask").remove();
   }
   document.getElementById("form-btns").innerHTML = `
-      <button class="button update" id = "updateTask" onclick = "updateData('${c}')">󠀫󠀫<i class="fas fa-sync-alt"></i> UPDATE TASK</button>
-      <button class="button cancel" id = "cancelTask" onclick = "cancelUpdation()"><i class="fas fa-ban"></i> CANCEL</button>
-      `;
+    <button class="button update" id = "updateTask" onclick = "updateData('${c}')">󠀫󠀫<i class="fas fa-sync-alt"></i> UPDATE TASK</button>
+    <button class="button cancel" id = "cancelTask" onclick = "cancelUpdation()"><i class="fas fa-ban"></i> CANCEL</button>
+    `;
 }
 
 // Funtion invoked by update button
@@ -140,8 +141,8 @@ function updateData(c) {
   document.getElementById("updateTask").remove();
   document.getElementById("cancelTask").remove();
   document.getElementById("form-btns").innerHTML = `
-      <button type="submit" class="button add" id = "addTask" >󠀫󠀫<i class="fas fa-plus"></i> ADD TASK</button>
-      `;
+    <button type="submit" class="button add" id = "addTask" >󠀫󠀫<i class="fas fa-plus"></i> ADD TASK</button>
+    `;
 
   // Updating the task in the side bar
   document
@@ -162,18 +163,18 @@ function cancelUpdation() {
   document.getElementById("updateTask").remove();
   document.getElementById("cancelTask").remove();
   document.getElementById("form-btns").innerHTML = `
-      <button type="submit" class="button add" id = "addTask" >󠀫󠀫<i class="fas fa-plus"></i> ADD TASK</button>
-      `;
+    <button type="submit" class="button add" id = "addTask" >󠀫󠀫<i class="fas fa-plus"></i> ADD TASK</button>
+    `;
 }
 
 // function invoked by delete btn
 // removes the task from the database and taskbar -> updates the total number of tasks in the database
-function deleteData(c) {
+function deleteData(code) {
   firebase
     .database()
-    .ref("TaskList/" + c)
+    .ref("TaskList/" + code)
     .remove();
-  document.getElementById(c).remove();
+  document.getElementById(code).remove();
   console.log(totalItems);
   firebase
     .database()
@@ -229,20 +230,20 @@ function storeTask(event) {
   document.getElementById("tasks-header").insertAdjacentHTML(
     "afterend",
     `<div class="Task-item" id="${code}">
-      <div class="data" id="${task}">
-          <button id="done" class="done" onclick = "changeStatus('${code}')"><i class="far fa-check-circle"></i></button>
-          <h2 class="Task">${task}</h2>
-          <p class="desc">${desc}</p>
-          <small id = "status"></small>
-      </div>
-      <hr>
-      <div class="buttons">
-          <button class="button edit" id="editbtn" onclick = "editData('${code}')"><i class="fas fa-edit"></i> EDIT TASK</button>
-          <button class="button delete" id="deletebtn" onclick = "deleteData('${code}')">
-          <i class="fas fa-trash-alt"></i>DELETE TASK</button>
-      </div>
-      
-      </div>`
+    <div class="data" id="${task}">
+        <button id="done" class="done" onclick = "changeStatus('${code}')"><i class="far fa-check-circle"></i></button>
+        <h2 class="Task">${task}</h2>
+        <p class="desc">${desc}</p>
+        <small id = "status"></small>
+    </div>
+    <hr>
+    <div class="buttons">
+        <button class="button edit" id="editbtn" onclick = "editData('${code}')"><i class="fas fa-edit"></i> EDIT TASK</button>
+        <button class="button delete" id="deletebtn" onclick = "deleteData('${code}')">
+        <i class="fas fa-trash-alt"></i>DELETE TASK</button>
+    </div>
+    
+    </div>`
   );
 }
 
@@ -269,9 +270,9 @@ function showAll() {
     document.getElementById("tasks-header").insertAdjacentHTML(
       "afterend",
       `<div class="no-task-info" id = "info">
-              <i class="fas fa-info-circle"></i>
-              No pending tasks
-          </div>`
+            <i class="fas fa-info-circle"></i>
+            No pending tasks
+        </div>`
     );
   }
   if (data === null && document.getElementById("info") !== null) {
@@ -279,9 +280,9 @@ function showAll() {
     document.getElementById("tasks-header").insertAdjacentHTML(
       "afterend",
       `<div class="no-task-info" id = "info">
-              <i class="fas fa-info-circle"></i>
-              No pending tasks
-          </div>`
+            <i class="fas fa-info-circle"></i>
+            No pending tasks
+        </div>`
     );
   }
   document.querySelectorAll(".Task-item").forEach((element) => {
@@ -305,19 +306,19 @@ function showAll() {
     document.getElementById("tasks-header").insertAdjacentHTML(
       "afterend",
       `<div class="Task-item" id="${code}">
-          <div class="data" id="${task}">
-              <button id="done" class="done" style="color : ${color}" onclick = "changeStatus('${code}')"><i class="far fa-check-circle"></i></button>
-              <h2 class="Task">${task}</h2>
-              <p class="desc">${desc}</p>
-              <small id = "status"></small>
-          </div>
-          <hr>
-          <div class="buttons">
-              <button class="button edit" id="editbtn" onclick = "editData('${code}')"><i class="fas fa-edit"></i> EDIT TASK</button>
-              <button class="button delete" id="deletebtn" onclick = "deleteData('${code}')"><i class="fas fa-trash-alt"></i> DELETE TASK</button>
-          </div>
-          
-          </div>`
+        <div class="data" id="${task}">
+            <button id="done" class="done" style="color : ${color}" onclick = "changeStatus('${code}')"><i class="far fa-check-circle"></i></button>
+            <h2 class="Task">${task}</h2>
+            <p class="desc">${desc}</p>
+            <small id = "status"></small>
+        </div>
+        <hr>
+        <div class="buttons">
+            <button class="button edit" id="editbtn" onclick = "editData('${code}')"><i class="fas fa-edit"></i> EDIT TASK</button>
+            <button class="button delete" id="deletebtn" onclick = "deleteData('${code}')"><i class="fas fa-trash-alt"></i> DELETE TASK</button>
+        </div>
+        
+        </div>`
     );
 
     if (status === "pending") {
@@ -344,8 +345,8 @@ function showAll() {
         .querySelector("#editbtn").style.backgroundColor =
         "rgba(116, 116, 116, 0.671)";
       document.getElementById(code).querySelector("#status").innerHTML = `
-              <i class="far fa-check-circle"></i> Completed
-              `;
+            <i class="far fa-check-circle"></i> Completed
+            `;
     }
   }
 }
@@ -359,9 +360,9 @@ function deleteAll() {
     document.getElementById("tasks-header").insertAdjacentHTML(
       "afterend",
       `<div class="no-task-info" id = "info">
-              <i class="fas fa-info-circle"></i>
-              No pending tasks
-          </div>`
+            <i class="fas fa-info-circle"></i>
+            No pending tasks
+        </div>`
     );
   }
   if (totalItems !== 0) {
@@ -380,9 +381,9 @@ function deleteAll() {
       document.getElementById("tasks-header").insertAdjacentHTML(
         "afterend",
         `<div class="no-task-info" id = "info">
-                  <i class="fas fa-info-circle"></i>
-                  All items deleted
-              </div>`
+                <i class="fas fa-info-circle"></i>
+                All items deleted
+            </div>`
       );
     }
   }
