@@ -169,12 +169,12 @@ function cancelUpdation() {
 
 // function invoked by delete btn
 // removes the task from the database and taskbar -> updates the total number of tasks in the database
-function deleteData(code) {
+function deleteData(c) {
   firebase
     .database()
-    .ref("TaskList/" + code)
+    .ref("TaskList/" + c)
     .remove();
-  document.getElementById(code).remove();
+  document.getElementById(c).remove();
   console.log(totalItems);
   firebase
     .database()
